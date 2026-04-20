@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Cromossomo:
+class Cromossomo_Tabela:
     nome_item: str
     peso_item: int
     valor_item: int
