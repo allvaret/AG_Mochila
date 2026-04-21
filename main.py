@@ -23,15 +23,8 @@ def limitacoes_teste():
         Cromossomo_Tabela('Blusa',  3, 100, 7),
         Cromossomo_Tabela('Calça',  6, 200, 2),
         Cromossomo_Tabela('Sapato', 4,  50, 5),
-        Cromossomo_Tabela('Bolsa',  5, 150, 3),
-        Cromossomo_Tabela('Relógio', 2, 300, 4),
-        Cromossomo_Tabela('Cinto',  1,  80, 6),
-        Cromossomo_Tabela('Chapéu', 2, 120, 4),
-        Cromossomo_Tabela('Óculos', 1, 250, 3),
-        Cromossomo_Tabela('Jaqueta', 7, 400, 2),
-        Cromossomo_Tabela('Meia',   1,  20, 10)
     ]
-    peso_limite       = 100
+    peso_limite       = 40
     tamanho_populacao = 4
     taxa_mutacao      = 0.1
     limite_s_melhora  = 5
