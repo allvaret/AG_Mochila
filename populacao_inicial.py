@@ -11,10 +11,14 @@ def ler_inteiro(mensagem):
             print("Entrada inválida. Por favor, digite um número inteiro.")
 
 
-def limitacoes_individuos(n_ind=3):
+def limitacoes_individuos():
     limitacoes = []
-    nomes = ['Blusa', 'Calça', 'Sapato']
+    nomes = ['Blusa', 'Calça', 'Sapato', 'Bolsa', 'Relógio', 'Cinto', 'Chapéu', 'Óculos', 'Jaqueta', 'Meia']
 
+    n_ind = int(input(f"Quantos itens deseja definir? (máximo {len(nomes)}): "))
+    while n_ind < 1 or n_ind > len(nomes):
+        n_ind = int(input(f"Quantos itens deseja definir? (máximo {len(nomes)}): "))
+        
 
     for ind in range(n_ind):
         print(f"Insira as limitações do Cromossomo {nomes[ind]}:")
@@ -33,7 +37,10 @@ def limitacoes_individuos(n_ind=3):
     print("Defina a taxa de mutação: ")
     taxa_mutacao = float(input("Taxa de mutação (decimal, entre 0 e 1): "))
 
-    return limitacoes, peso_limite, tamanho_populacao, taxa_mutacao
+    print("Defina o critério de parada (gerações sem melhora): ")
+    limite_s_melhora = ler_inteiro("Limite sem melhora: ")
+
+    return limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora
 
 
 def gera_individuos(tamanho_populacao, limitacoes, peso_limite):

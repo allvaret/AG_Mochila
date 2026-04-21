@@ -2,29 +2,21 @@ import random
 from individuo import Individuo
 
 
-def crossover(individuo1, individuo2,limitacoes, peso_limite):
+def crossover(individuo1, individuo2):
     filho1_cromossomo = []
     filho2_cromossomo = []
-    
-    for gene1, gene2 in zip(individuo1.cromossomo, individuo2.cromossomo):
+    trocados = []
+
+    for i, (gene1, gene2) in enumerate(zip(individuo1.cromossomo, individuo2.cromossomo)):
         if random.random() < 0.5:
             filho1_cromossomo.append(gene1)
             filho2_cromossomo.append(gene2)
         else:
             filho1_cromossomo.append(gene2)
             filho2_cromossomo.append(gene1)
+            trocados.append(i)
 
-    filho1 = Individuo(cromossomo=filho1_cromossomo, limitacoes=limitacoes, peso_limite=peso_limite)
-    filho2 = Individuo(cromossomo=filho2_cromossomo, limitacoes=limitacoes, peso_limite=peso_limite)
-    
-        
-    if filho1.valido == False:
-            filho1 = filho1.reparar()
-
-    if filho2.valido == False:
-            filho2 = filho2.reparar()
-
-    return filho1, filho2
+    return filho1_cromossomo, filho2_cromossomo, trocados
 
 
 def mutacao(individuos, taxa_mutacao, limitacoes):

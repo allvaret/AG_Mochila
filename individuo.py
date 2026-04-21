@@ -18,16 +18,15 @@ class Individuo:
     def reparar(self, max_tentativas=1000):
         """Repara um indivíduo inválido gerando um novo válido"""
         tentativas = 0
-        
         while not self.valido and tentativas < max_tentativas:
-            novo_cromossomo = [randint(0, self.limitacoes[i].qtd_item) 
-                            for i in range(len(self.cromossomo))]
-            self.cromossomo = novo_cromossomo
-            self.peso_total = sum(qtd * peso.peso_item for qtd, peso in zip(self.cromossomo, self.limitacoes))
-            self.valor_total = sum(qtd * valor.valor_item for qtd, valor in zip(self.cromossomo, self.limitacoes))
+            i = randint(0, len(self.cromossomo) - 1)
+            if self.cromossomo[i] > 0:
+                self.cromossomo[i] -= 1
+            self.peso_total  = sum(qtd * item.peso_item  for qtd, item in zip(self.cromossomo, self.limitacoes))
+            self.valor_total = sum(qtd * item.valor_item for qtd, item in zip(self.cromossomo, self.limitacoes))
             self.valido = self._validar()
             tentativas += 1
-        
+            
         if not self.valido:
             print(f"[DEBUG] Último cromossomo tentado: {self.cromossomo} | Peso: {self.peso_total} | Valor: {self.valor_total}")
             raise ValueError(f"Não foi possível gerar indivíduo válido após {max_tentativas} tentativas"
