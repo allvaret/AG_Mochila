@@ -4,7 +4,7 @@ from populacao_inicial import limitacoes_individuos, gera_individuos
 from troca import mutacao, crossover
 from selecao import roleta_viciada, fitness, fitness_total
 
-
+ 
 def imprimir_tabela_itens(limitacoes, peso_limite, tamanho_populacao, taxa_mutacao):
     print("\n" + "="*55)
     print(f"  {'ITEM':<10} {'PESO':>8} {'VALOR':>8} {'QTD LIMITE':>12}")
@@ -118,7 +118,7 @@ def main(debug=True):
         if debug:
             print(f"\n  [MUTAÇÃO] Sorteio: {sorteio_mut:.3f} (taxa: {taxa_mutacao}) — ", end="")
             if houve:
-                print(f"OCORREU | Ind selecionado: {idx+1} | Gene {gene}: {v_antigo} → {v_novo} (sorteio ind: {sorteio_ind:.3f})")
+                print(f"OCORREU | Ind selecionado: {idx+1} | Gene {gene}: {v_antigo} → {v_novo} (sorteio ind: {sorteio_ind:.3f})") # type: ignore
             else:
                 print("não ocorreu")
 
