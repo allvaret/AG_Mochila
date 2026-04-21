@@ -23,12 +23,15 @@ class Individuo:
             novo_cromossomo = [randint(0, self.limitacoes[i].qtd_item) 
                             for i in range(len(self.cromossomo))]
             self.cromossomo = novo_cromossomo
+            self.peso_total = sum(qtd * peso.peso_item for qtd, peso in zip(self.cromossomo, self.limitacoes))
+            self.valor_total = sum(qtd * valor.valor_item for qtd, valor in zip(self.cromossomo, self.limitacoes))
             self.valido = self._validar()
             tentativas += 1
         
         if not self.valido:
-            raise ValueError(f"Não foi possível gerar indivíduo válido após {max_tentativas} tentativas")
-        
+            print(f"[DEBUG] Último cromossomo tentado: {self.cromossomo} | Peso: {self.peso_total} | Valor: {self.valor_total}")
+            raise ValueError(f"Não foi possível gerar indivíduo válido após {max_tentativas} tentativas"
+                             f"Verifique se o peso limite ({self.peso_limite}) é compatível com os itens.")
         return self
     
     @classmethod

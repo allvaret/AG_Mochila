@@ -17,7 +17,7 @@ def limitacoes_individuos(n_ind=3):
 
 
     for ind in range(n_ind):
-        print(f"Insira as limitações do individuo {ind}")
+        print(f"Insira as limitações do Cromossomo {nomes[ind]}:")
         limitacoes_peso = ler_inteiro("Definição de peso por item: ")
         limitacoes_valor = ler_inteiro("Definição de Valor: ")
         limitacoes_quantidade = ler_inteiro("Quantidade Limite: ")
@@ -44,8 +44,7 @@ def gera_individuos(tamanho_populacao, limitacoes, peso_limite):
         individuo = Individuo(cromossomo=cromossomo, limitacoes=limitacoes, peso_limite=peso_limite)
         
         if individuo.valido == False:
-            while individuo.valido == False:
-                individuo = individuo.reparar()
+            individuo = individuo.reparar()
         
         individuos.append(individuo)
 

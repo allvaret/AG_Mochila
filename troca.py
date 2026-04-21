@@ -28,11 +28,13 @@ def crossover(individuo1, individuo2,limitacoes, peso_limite):
 
 
 def mutacao(individuos, taxa_mutacao, limitacoes):
-    if random.random() < taxa_mutacao:
-        sorteio = random.random()
+    sorteio_mutacao = random.random()
+    if sorteio_mutacao < taxa_mutacao:
+        sorteio_individuo = random.random()
         for i, individuo in enumerate(individuos):
-            if sorteio < (i + 1) / len(individuos):
+            if sorteio_individuo < (i + 1) / len(individuos):
                 gene = random.randint(0, len(individuo.cromossomo) - 1)
+                valor_antigo = individuo.cromossomo[gene]
                 individuo.cromossomo[gene] = random.randint(0, limitacoes[gene].qtd_item)
-                break
-
+                return True, sorteio_mutacao, sorteio_individuo, i, gene, valor_antigo, individuo.cromossomo[gene]
+    return False, sorteio_mutacao, None, None, None, None, None
