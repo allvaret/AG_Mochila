@@ -36,14 +36,7 @@ def roleta_viciada(individuos):
     melhores = populacao_ordenada[:metade]
     piores = populacao_ordenada[metade:]
 
-    if random.random() < 0.5:
-        pai, sorteio_pai = selecao_roleta(melhores)
-        mae, sorteio_mae = selecao_roleta(piores)
-        origem_pai, origem_mae = "melhores", "piores"
+    pai, sorteio_pai = selecao_roleta(melhores)
+    mae, sorteio_mae = selecao_roleta(piores)
 
-    else:
-        pai, sorteio_pai = selecao_roleta(piores)
-        mae, sorteio_mae = selecao_roleta(melhores)
-        origem_pai, origem_mae = "piores", "melhores"
-
-    return (pai, sorteio_pai, origem_pai), (mae, sorteio_mae, origem_mae)
+    return (pai, sorteio_pai, "melhores"), (mae, sorteio_mae, "piores")
