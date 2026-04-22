@@ -26,7 +26,7 @@ def limitacoes_teste():
     ]
     peso_limite       = 40
     tamanho_populacao = 4
-    taxa_mutacao      = 0.33 # 1 / Tamanho do cromossomo; Para uma maior diversidade
+    taxa_mutacao      = 1 / len(limitacoes) # 1 / Tamanho do cromossomo; Para uma maior diversidade
     limite_s_melhora  = 10
 
     return limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora
@@ -57,6 +57,7 @@ def main(debug=True):
             print(f"\n{'='*40}")
             print(f"Geração {iteracao} | Sem melhora: {contagem_s_melhora}/{limite_s_melhora}")
             print(f"{'='*40}")
+
             for j, ind in enumerate(individuos):
                 print(f"  Ind {j+1}: {ind.cromossomo} | Peso: {ind.peso_total} | Valor: {ind.valor_total}")
 
