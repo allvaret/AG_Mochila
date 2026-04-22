@@ -11,7 +11,7 @@ class Individuo:
         self.valor_total = sum(qtd * valor.valor_item for qtd, valor in zip(cromossomo, limitacoes))
         self.valido = self._validar()
 
-    def _validar(self):
+    def _validar(self) -> bool :
         """Verifica se o indivíduo é válido baseado no peso total"""
         return self.peso_total <= self.peso_limite
     
