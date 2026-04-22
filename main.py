@@ -26,8 +26,8 @@ def limitacoes_teste():
     ]
     peso_limite       = 40
     tamanho_populacao = 4
-    taxa_mutacao      = 0.1
-    limite_s_melhora  = 5
+    taxa_mutacao      = 0.33 # 1 / Tamanho do cromossomo; Para uma maior diversidade
+    limite_s_melhora  = 10
 
     return limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora
 
@@ -98,13 +98,6 @@ def main(debug=True):
             print(f"  Filho 1: {''.join(f1_fmt)} | Peso: {filho1.peso_total} | Valor: {filho1.valor_total} | {status1}")
             print(f"  Filho 2: {''.join(f2_fmt)} | Peso: {filho2.peso_total} | Valor: {filho2.valor_total} | {status2}")
 
-        individuos = sorted(individuos, key=lambda ind: ind.valor_total, reverse=True)
-
-        if filho1.valido:
-            individuos[-1] = filho1
-        if filho2.valido:
-            individuos[-2] = filho2
-
             
         houve, sorteio_mut, sorteio_ind, idx, gene, v_antigo, v_novo = mutacao([filho1, filho2], taxa_mutacao, limitacoes)
 
@@ -115,9 +108,13 @@ def main(debug=True):
             else:
                 print("não ocorreu")
 
+
         individuos = sorted(individuos, key=lambda ind: ind.valor_total, reverse=True)
-        individuos[-1] = filho1
-        individuos[-2] = filho2
+
+        if filho1.valido:
+            individuos[-1] = filho1
+        if filho2.valido:
+            individuos[-2] = filho2
 
         iteracao += 1
 
