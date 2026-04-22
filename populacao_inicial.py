@@ -1,4 +1,3 @@
-from random import randint
 from cromossomo_tabela import Cromossomo_Tabela
 from individuo import Individuo
 
@@ -46,15 +45,9 @@ def limitacoes_individuos():
 def gera_individuos(tamanho_populacao, limitacoes, peso_limite):
     individuos = []
 
-    for ind in range(tamanho_populacao):
-        cromossomo = [randint(0, limitacoes[i].qtd_item) for i in range(len(limitacoes))]
-        individuo = Individuo(cromossomo=cromossomo, limitacoes=limitacoes, peso_limite=peso_limite)
-        
-        if individuo.valido == False:
-            individuo = individuo.reparar()
-        
+    for _ in range(tamanho_populacao):
+        individuo = Individuo.criar_valido(limitacoes, peso_limite)
         individuos.append(individuo)
-
     return individuos
 
 
