@@ -1,22 +1,9 @@
 from cromossomo_tabela import Cromossomo_Tabela
 from individuo import Individuo
 from populacao_inicial import limitacoes_individuos, gera_individuos
-from troca import mutacao, crossover
+from troca import mutacao, crossover, taxa_mutacao_dinamica
 from selecao import roleta_viciada, fitness
-
- 
-def imprimir_tabela_itens(limitacoes, peso_limite, tamanho_populacao, taxa_mutacao):
-    print("\n" + "="*55)
-    print(f"  {'ITEM':<10} {'PESO':>8} {'VALOR':>8} {'QTD LIMITE':>12}")
-    print("-"*55)
-    for item in limitacoes:
-        print(f"  {item.nome_item:<10} {item.peso_item:>8} {item.valor_item:>8} {item.qtd_item:>12}")
-    print("="*55)
-    print(f"  Peso limite:       {peso_limite}")
-    print(f"  Tamanho população: {tamanho_populacao}")
-    print(f"  Taxa de mutação:   {taxa_mutacao}")
-    print("="*55 + "\n")
-
+from main import imprimir_tabela_itens
 
 def limitacoes_teste():
     limitacoes = [
@@ -26,21 +13,22 @@ def limitacoes_teste():
     ]
     peso_limite       = 40
     tamanho_populacao = 4
-    taxa_mutacao      = 1 / len(limitacoes) # 1 / Tamanho do cromossomo; Para uma maior diversidade
     limite_s_melhora  = 10
 
-    return limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora
+    return limitacoes, peso_limite, tamanho_populacao, limite_s_melhora
 
 MODO_TESTE = True
 
 
 def main(debug=True):
     if MODO_TESTE:
-        limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora = limitacoes_teste()
+        limitacoes, peso_limite, tamanho_populacao, limite_s_melhora = limitacoes_teste()
     else:
-        limitacoes, peso_limite, tamanho_populacao, taxa_mutacao, limite_s_melhora = limitacoes_individuos()
-    
-    imprimir_tabela_itens(limitacoes, peso_limite, tamanho_populacao, taxa_mutacao)
+        limitacoes, peso_limite, tamanho_populacao, limite_s_melhora = limitacoes_individuos()
+
+    taxa_mutacao_base = 1 / len(limitacoes) # 1 / Tamanho do cromossomo; Para uma maior diversidade
+
+    imprimir_tabela_itens(limitacoes, peso_limite, tamanho_populacao, taxa_mutacao_base)
 
     try:
         individuos = gera_individuos(tamanho_populacao, limitacoes, peso_limite)
@@ -99,7 +87,7 @@ def main(debug=True):
             print(f"  Filho 1: {''.join(f1_fmt)} | Peso: {filho1.peso_total} | Valor: {filho1.valor_total} | {status1}")
             print(f"  Filho 2: {''.join(f2_fmt)} | Peso: {filho2.peso_total} | Valor: {filho2.valor_total} | {status2}")
 
-            
+        taxa_mutacao = taxa_mutacao_dinamica(individuos, taxa_mutacao_base)
         houve, sorteio_mut, sorteio_ind, idx, gene, v_antigo, v_novo = mutacao([filho1, filho2], taxa_mutacao, limitacoes)
 
         if debug:

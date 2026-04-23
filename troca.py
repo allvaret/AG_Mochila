@@ -41,3 +41,16 @@ def mutacao(individuos, taxa_mutacao, limitacoes):
 
                 return True, sorteio_mutacao, sorteio_individuo, i, gene, valor_antigo, individuo.cromossomo[gene]
     return False, sorteio_mutacao, None, None, None, None, None
+
+
+def taxa_mutacao_dinamica(individuos, taxa_base):
+    valores = [ind.valor_total for ind in individuos]
+    if max(valores) == min(valores):
+        return min(taxa_base * 5, 0.9)  # população homogênea — força mutação
+
+    diversidade = (max(valores) - min(valores)) / max(valores)
+    if diversidade < 0.05:  # menos de 5% de variação
+        return min(taxa_base * 3, 0.7)
+
+    return taxa_base
+
