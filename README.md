@@ -1,6 +1,20 @@
 # Algoritmo Genético — Problema da Mochila
+## O Problema
+O problema da mochila é um clássico de otimização combinatória: dado um conjunto de itens, cada um com peso e valor, o objetivo é selecionar a combinação que maximiza o valor total sem ultrapassar a capacidade máxima definida. 
 
-Implementação de um Algoritmo Genético (AG) para resolver o problema da mochila, onde o objetivo é maximizar o valor total dos itens carregados sem ultrapassar um peso limite.
+Nessa implementação, os itens são peças de roupa e o algoritmo evolui populações de soluções ao longo de gerações para encontrar a combinação ótima.
+## Abordagem
+A solução usa um Algoritmo Genético, inspirado na seleção natural: indivíduos mais adaptados têm maior chance de reprodução, transmitindo suas características às gerações seguintes. O ciclo envolve seleção, cruzamento e mutação até convergir para uma solução satisfatória.
+Com heurísticas adicionais, seria possível introduzir restrições de diversificação — como limitar combinações por categoria ou estilo — aumentando a complexidade e a aplicabilidade do modelo.
+
+## Principal Desafio
+A população inicial do problema base era pequena, o que causava convergência prematura: rapidamente todos os indivíduos se tornavam geneticamente idênticos, interrompendo a evolução antes de atingir o ótimo.
+A solução implementada foi uma taxa de mutação dinâmica baseada na homogeneidade da população: conforme a diversidade genética cai, a taxa de mutação aumenta automaticamente, reintroduzindo variação e permitindo que o algoritmo continue explorando o espaço de soluções.
+
+## Aprendizados
+Convergência prematura é um dos problemas centrais em algoritmos evolutivos. Esse projeto mostrou na prática como populações pequenas amplificam esse risco — e como monitorar diversidade genética e reagir a ela dinamicamente é uma estratégia mais robusta do que fixar hiperparâmetros no início.
+
+---
 
 O projeto possui duas versões do orquestrador principal:
 
